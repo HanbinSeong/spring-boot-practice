@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.ai.mcp: DEBUG
+    io.modelcontextprotocol: DEBUG
+
+spring:
+  ai:
+    # --- OpenAI 모델 설정(원하는 LLM로 교체 가능) ---
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      base-url: ${OPENAI_BASE_URL:https://api.groq.com/openai}
+      chat:
+        options:
+          model: ${OPENAI_MODEL:llama-3.1-8b-instant}
+
+    # --- MCP Client: STDIO로 DuckDuckGo MCP를 자식 프로세스로 실행 ---
+    mcp:
+      client:
+        enabled: true
+        type: SYNC     # SYNC or ASYNC
+        stdio:
+          connections:
+            duck:                         # 연결 이름
+              command: "C:/Users/inseo/.mcpvenv/Scripts/duckduckgo-mcp-server.exe"
+              args: []
+              # env:
+              #   HTTP_PROXY: ${HTTP_PROXY:}
+              #   HTTPS_PROXY: ${HTTPS_PROXY:}
