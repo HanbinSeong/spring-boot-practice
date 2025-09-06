@@ -1,22 +1,15 @@
 package com.example.lang_graph_practice.langgraph;
 
-import com.example.lang_graph_practice.dto.LangGraphDto;
 import com.example.lang_graph_practice.langgraph.node.LlmNode;
-import com.example.lang_graph_practice.service.LlmService;
 import lombok.RequiredArgsConstructor;
 import org.bsc.langgraph4j.CompiledGraph;
 import org.bsc.langgraph4j.StateGraph;
 import org.bsc.langgraph4j.GraphStateException;
-import org.bsc.langgraph4j.action.AsyncNodeAction;
 import org.bsc.langgraph4j.state.AgentState;
-import org.bsc.langgraph4j.state.Channel;
-import org.bsc.langgraph4j.state.Channels;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+
 
 @Configuration
 @RequiredArgsConstructor

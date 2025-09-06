@@ -7,25 +7,31 @@ logging:
     io.modelcontextprotocol: DEBUG
 
 spring:
+  config:
+    import: optional:file:.env[.properties]
   ai:
-    # --- OpenAI 모델 설정(원하는 LLM로 교체 가능) ---
     openai:
       api-key: ${OPENAI_API_KEY}
-      base-url: ${OPENAI_BASE_URL:https://api.groq.com/openai}
+      base-url: ${OPENAI_BASE_URL}
       chat:
         options:
-          model: ${OPENAI_MODEL:llama-3.1-8b-instant}
-
-    # --- MCP Client: STDIO로 DuckDuckGo MCP를 자식 프로세스로 실행 ---
+          model: ${OPENAI_MODEL}
+          temperature: 1
     mcp:
       client:
         enabled: true
-        type: SYNC     # SYNC or ASYNC
+        type: SYNC            # 또는 ASYNC
+        request-timeout: 30s
         stdio:
           connections:
-            duck:                         # 연결 이름
-              command: "C:/Users/inseo/.mcpvenv/Scripts/duckduckgo-mcp-server.exe"
-              args: []
-              # env:
-              #   HTTP_PROXY: ${HTTP_PROXY:}
-              #   HTTPS_PROXY: ${HTTPS_PROXY:}
+            # DuckDuckGo MCP
+            duck:
+              command: ${MCP_DDG_CMD}
+            # DartPoint MCP
+            dartpoint:
+              command: "C:/Program Files/nodejs/npx.cmd"
+              args:
+                - mcp-remote
+                - https://dartpoint.ai/mcp-sse/mcp
+                - --header
+                - "DARTPOINT-API-KEY:${DARTPOINT_API_KEY}"
