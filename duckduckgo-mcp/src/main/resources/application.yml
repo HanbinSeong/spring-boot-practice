@@ -27,6 +27,7 @@ spring:
             # DuckDuckGo MCP
             duck:
               command: ${MCP_DDG_CMD}
+              args: []
             # DartPoint MCP
             dartpoint:
               command: "C:/Program Files/nodejs/npx.cmd"
