@@ -28,11 +28,10 @@ spring:
             duck:
               command: ${MCP_DDG_CMD}
               args: []
-            # DartPoint MCP
-            dartpoint:
+            # tavily
+            tavily:
               command: "C:/Program Files/nodejs/npx.cmd"
               args:
+                - -y
                 - mcp-remote
-                - https://dartpoint.ai/mcp-sse/mcp
-                - --header
-                - "DARTPOINT-API-KEY:${DARTPOINT_API_KEY}"
+                - https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}

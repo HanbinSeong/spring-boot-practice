@@ -1,5 +1,6 @@
 package com.example.duckduckgo_mcp.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -16,15 +17,12 @@ import static com.example.duckduckgo_mcp.constants.LlmConstants.*;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class PromptCatalogService {
 
     private final ResourceLoader resourceLoader;
     private final StTemplateRenderer renderer;
 
-    public PromptCatalogService(ResourceLoader resourceLoader, StTemplateRenderer renderer) {
-        this.resourceLoader = resourceLoader;
-        this.renderer = renderer;
-    }
 
     private Resource resolve(String key) {
         final Resource res;

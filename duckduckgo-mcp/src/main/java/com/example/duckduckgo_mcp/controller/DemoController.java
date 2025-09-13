@@ -1,6 +1,7 @@
 package com.example.duckduckgo_mcp.controller;
 
 import com.example.duckduckgo_mcp.service.DartService;
+import com.example.duckduckgo_mcp.service.OtherNoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +20,7 @@ class DemoController {
     private final ChatClient chatWithMcp;
 
     private final DartService dartService;
+    private final OtherNoticeService otherNoticeService;
 
     @GetMapping("/plain")
     public Mono<String> plain(@RequestParam(defaultValue = "간단 자기소개") String q) {
@@ -37,5 +39,10 @@ class DemoController {
     @PostMapping("/dart")
     public Mono<String> dart(@RequestBody String corpName) {
         return dartService.run(corpName);
+    }
+
+    @GetMapping("/notice")
+    public String other_notice(@RequestParam String corpName) {
+        return otherNoticeService.otherNotice(corpName);
     }
 }
